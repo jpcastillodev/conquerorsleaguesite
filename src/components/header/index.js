@@ -2,9 +2,8 @@ import React from "react"
 
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "../../pages/dashboard/Dashboard";
-import Products from "../../pages/products/Products";
-import Product from "../../pages/products/Product";
-
+import Admin from "../../pages/admin/Admin";
+import EntryData from "../../pages/entrydata/EntryData";
 import Navigation from "../navigation";
 class Header extends React.Component {
     render() {
@@ -17,8 +16,9 @@ class Header extends React.Component {
                 <div className=" py-5 min-h-max">
                     <Routes>
                         <Route path="/" element={<Dashboard />} />
-                        <Route exact path="/product/:id" element={<Product />} />
-                        <Route exact path="/campaign" element={<Products />} />
+                        <Route exact path="/match-history" element={<Admin />} />
+                        <Route exact path="/entry-data" element={<EntryData />} />
+
                         <Route exact path="/dashboard" element={<Dashboard />} />
                     </Routes>
                 </div>

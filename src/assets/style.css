@@ -18,12 +18,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #131416;
-
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 *,
@@ -36,30 +34,30 @@ code {
 }
 
 .kaisa-image {
-
   position: absolute;
-  top: 64px;
-
+  top: 72px;
+  width: 780px;
   z-index: 0;
-  left: 4rem;
+  left: 5vw;
   object-fit: cover;
 }
 
 .lucian-image {
   position: absolute;
-  top: 64px;
+  top: 72px;
   z-index: 0;
-  right: 4rem;
+  right: 5vw;
   object-fit: cover;
 }
 
-
 .leading-champions-title {
   padding-top: 20px;
+  padding-right: 30px;
+  padding-left: 30px;
   font-family: "Bebas Neue", "Source Sans Pro", sans-serif;
   text-transform: uppercase;
-  font-size: calc(1vw + 3vh + 3vmin);
-  line-height: calc(1vw + 3vh + 3vmin);
+  font-size: calc(2vw + 3vh + 3vmin);
+  line-height: calc(2vw + 3vh + 3vmin);
   letter-spacing: 0.01em;
 }
 
@@ -94,16 +92,13 @@ code {
   height: 100%;
   top: 0;
   left: 0;
-
   transition: opacity 0.5s ease 250ms;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
 }
 
 .title-block:before {
-
   z-index: -100;
   background-image: url('https://championsqueue.lolesports.com/static/39e5592d0dce1ec215a983add6dcc853/bb7fb/title-pattern.webp');
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsTAAALEwEAmpwYAAAA30lEQVQoz23RvyvFYRQG8M9AEgZFSjEZzAxIxrsbjcxMd1LIH6CsBmVgNCgDgxhsFsliUQabweT6lXuvvjlyenPq7ZzznKfzPqcH2uldYhyDOE74V8H7wCY6MI+nNLON1wQ0sY9hzOI68HOcRt2K/Igl9GENb9IPrbT0BEOYxm1ge9gqFFdKV9CFDbwrTrnDHAZwUMw+i34H/ajhIZ/cjs119GIZjUSolK+Hgqq/wiRGcfSPIIcYwRRuCsIZJvzEAlbRHbmZeC9hUnW6HuwWpjxj0V90Rp7BfWHMBcZ+md8VKV8ylh6AMgAAAABJRU5ErkJggg==);
@@ -111,10 +106,8 @@ code {
 }
 
 .title-block:after {
-
   z-index: -101;
   background-image: url('https://championsqueue.lolesports.com/static/39e5592d0dce1ec215a983add6dcc853/bb7fb/title-pattern.webp');
-
   opacity: 1;
 }
 
@@ -122,7 +115,11 @@ code {
   text-transform: uppercase;
   color: #facc15;
   font-size: 20px;
+}
 
+.highlight {
+  text-transform: uppercase;
+  color: #facc15;
 }
 
 .first-block {
@@ -134,8 +131,8 @@ code {
 
 .first-block .rank {
   text-transform: uppercase;
-  font-size: 80px;
-  line-height: 80px;
+  font-size: 100px;
+  line-height: 100px;
 }
 
 .player-name {
@@ -150,7 +147,6 @@ code {
   max-width: 1440px;
   margin: 0px auto;
   position: relative;
-
 }
 
 .bottom-row-player {
@@ -208,7 +204,18 @@ code {
   resize: none;
   outline: none;
 }
-
+.entry-data{
+  width: 100%;
+  color: white;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.205);
+}
+.entry-select{
+  width: 100%;
+  color: #facc15;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.205);
+}
 .headers {
   display: flex;
   -webkit-box-align: stretch;
@@ -250,6 +257,11 @@ code {
   margin-bottom: 32px;
 }
 
+.divider {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
 .player-row {
   display: flex;
   -webkit-box-align: stretch;
@@ -271,15 +283,6 @@ code {
   background-color: rgb(203, 149, 22);
 }
 
-button,
-input,
-optgroup,
-select,
-textarea {
-  padding: 0px;
-  line-height: inherit;
-  color: inherit;
-}
 
 .headers .header.name {
   -webkit-box-flex: 1;
@@ -338,6 +341,7 @@ textarea {
   height: 100%;
   color: white;
 }
+
 .player-row:nth-child(2n) .row-cell:nth-of-type(n+3)::before {
   content: "";
   position: absolute;
@@ -347,10 +351,132 @@ textarea {
   width: 3px;
   background-color: rgb(0, 0, 0);
 }
-@media (min-width: 1076px) {
 
+.row.left {
+  margin-right: 10px;
+}
+
+.row .avatar {
+  width: 75px;
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+}
+
+.row.left .summoner {
+  margin-right: 20px;
+}
+
+.row .name {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  font-size: 19px;
+}
+
+.score-container {
+  margin: 10px;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+
+.teams {
+  display: flex;
+  align-items: flex-start;
+  padding: 0px 20px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.teams .team {
+  width: 50%;
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.row .kda.header {
+  font-family: "Bebas Neue", "Source Sans Pro", sans-serif;
+  text-transform: uppercase;
+  font-size: 22px;
+  color: rgb(255, 255, 255);
+}
+
+.row .cs.header {
+  font-family: "Bebas Neue", "Source Sans Pro", sans-serif;
+  text-transform: uppercase;
+  font-size: 22px;
+  color: rgb(255, 255, 255);
+}
+
+.row .gold.header {
+  font-family: "Bebas Neue", "Source Sans Pro", sans-serif;
+  text-transform: uppercase;
+  font-size: 22px;
+  color: rgb(255, 255, 255);
+}
+
+.row {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  border: 1px solid transparent;
+}
+
+.row .avatar {
+  width: 75px;
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+}
+
+.image {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  margin: 10px 8px;
+  overflow: hidden;
+  position: relative;
+  border: 4px solid transparent;
+}
+
+.summoner:not(:last-child) {
+  margin-bottom: 5px;
+}
+
+.summoner {
+  width: 16px;
+}
+
+.row .name {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  font-size: 19px;
+}
+
+.team.left {
+  align-items: flex-end;
+}
+
+.player-avatars {
+  display: flex;
+  position: relative;
+}
+
+.team.left {
+  align-items: flex-end;
+}
+
+.container-match {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  height: 100%;
+}
+
+@media (min-width: 1076px) {
   .lp {
-    width: 100px;
+    width: 180px;
   }
 
   .seasonPoints {
@@ -386,7 +512,6 @@ textarea {
     width: 100px;
   }
 
-
   .player-row .row-cell:not(.name) {
     -webkit-box-flex: 0;
     flex-grow: 0;
@@ -399,7 +524,6 @@ textarea {
 }
 
 @media (max-width: 820px) {
-
 
   .player-row .row-cell.rank,
   .player-row .row-cell.stat,
