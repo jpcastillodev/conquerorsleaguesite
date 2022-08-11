@@ -137,7 +137,7 @@ const InputData = () => {
                         </span>
                     </div>
                     <hr />
-                    <table class="table-auto text-white w-full mt-6">
+                    <table className="table-auto text-white w-full mt-6">
                         <thead>
                             <tr>
                                 <th>Champion</th>
@@ -235,7 +235,7 @@ const InputData = () => {
                         </span>
                     </div>
                     <hr />
-                    <table class="table-auto text-white w-full mt-6">
+                    <table className="table-auto text-white w-full mt-6">
                         <thead>
                             <tr>
                                 <th>Champion</th>

@@ -4,17 +4,17 @@ const Navigation = () => {
 
     return (
         <>
-            <div className="hidden md:flex justify-between px-6 pt-6 w-full uppercase text-xs tracking-widest font-light">
+            <div className="justify-between px-6 pt-6 w-full uppercase text-xs tracking-widest font-light">
                 <div className="grid justify-items-center w-full">
-                    <div className="flex gap-3 cursor-pointer text-white text-lg">
+                    <div className="flex gap-3 cursor-pointer text-white text-sm mdtext-lg">
                        
                         <a href="/">
                             LEADERBOARD
                         </a>
                         <div>|</div>
-                        <div className="text-gray-500">
-                            HALL OF CHAMPIONS
-                        </div>
+                        <a href="/live-games">
+                            LIVE GAMES
+                        </a>
                         <div>|</div>
                         <div className="text-gray-500">
                             MATCH HISTORY

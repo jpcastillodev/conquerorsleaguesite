@@ -10,6 +10,7 @@ const Dashboard = () => {
     const [filterPlayer, setFilterPlayer] = useState("")
 
     useEffect(() => {
+
         (async () => {
             try {
                 const { data: ranking } = await axios.post("https://us-central1-efektivos-qa.cloudfunctions.net/api/v1/config/ranking")
@@ -63,7 +64,7 @@ const Dashboard = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-5 ">
                     <div className="md:col-span-3 title-block title-container">
-                        <div className="mt-4" >
+                        <div className="mt-2 md:mt-7" >
                             <div className="leading-champions-title text-white font-semi text-center">Leading Conquerors</div>
                             <div className="pb-4 subtitle text-center">2022 Off Season</div>
                         </div>
@@ -76,9 +77,9 @@ const Dashboard = () => {
                             <div className="player-name">{ranking[0].nick}</div>
                             <div className="season-points">MMR: {ranking[0].mmr}</div>
                         </div>
-                        <div className="py-6 px-2 ">
+                        <div className="py-6 px-2 flex justify-end  w-full">
 
-                            <img src="/images/conqueror.png" width="150" height="75" alt="conqueror" />
+                            <img src="/images/conqueror.png" width="160" height="75" alt="conqueror" />
                         </div>
                     </div>
                     <div className="...">
@@ -120,8 +121,6 @@ const Dashboard = () => {
 
                 </div>
             </section>
-
-
             <section className="container pt-[4vw] px-4 md:px-0">
                 <div className=" subtitle">2022 Off Season | SPLIT 1 </div>
                 <div className="header-row">
@@ -153,6 +152,7 @@ const Dashboard = () => {
                         ranking
                             .map((player, index) => (
                                 <PlayerRow
+                                    key={index}
                                     show={(!filterPlayer || player.nick.toLowerCase().includes(filterPlayer.toLowerCase()))}
                                     rank={index + 1}
                                     player={player}
@@ -174,11 +174,11 @@ const PlayerRow = ({ rank, player, className, show }) => {
 
 
     const role = {
-        BOT: "ADC",
-        SUP: "SUPPORT",
-        TOP: "TOPLANER",
-        MID: "MIDLANER",
-        JGL: "JUNGLER"
+        BOT: "bottom",
+        SUP: "utility",
+        TOP: "top",
+        MID: "middle",
+        JGL: "jungle"
     }
 
 
@@ -200,7 +200,7 @@ const PlayerRow = ({ rank, player, className, show }) => {
                 const profile = docSnap.data()
                 setSocials(profile)
             } catch (err) {
-                console.log(err)
+                // console.log(err)
             }
         })()
     }, [player.nick])
@@ -211,18 +211,26 @@ const PlayerRow = ({ rank, player, className, show }) => {
         )
     }
     return (
-        <div className={["player-row", className, (show ? "hidden" : "")].join(" ")}>
+        <div key={rank} className={["player-row", className, (show ? "hidden" : "")].join(" ")}>
             <div className="info-small">
                 <div className="small-top-row">
                     <div className="small-rank">#{rank}</div>
                     <div className="small-name">{player.nick}</div>
                 </div>
                 <div>
-                    <div>MMR: {player.mmr}</div>
+                    <div className="text-2xl">MMR: {player.mmr}</div>
                 </div>
             </div>
             <div className="row-cell rank">#{rank}</div>
-            <div className="row-cell lp">{role[player.role]}</div>
+            <div className="row-cell lp ">
+                <div className="grid justify-items-start md:justify-items-center w-full ">
+
+                    <img
+                        className="intro-animation active first-icon"
+                        alt="icon"
+                        src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-champ-select/global/default/svg/position-${role[player.role]}.svg`} width="30" />
+                </div>
+            </div>
 
             <div className="row-cell stat seasonPoints">{player.mmr}</div>
             <div className="row-cell name">{player.nick}</div>
@@ -233,20 +241,20 @@ const PlayerRow = ({ rank, player, className, show }) => {
                     </a>}
                 {socials.youtube &&
                     <a href={socials.youtube} target="_blank" rel="noreferrer" className="link inverted cursor-pointer px-1">
-                        <i class="fa-brands fa-youtube fa-xl"></i>
+                        <i className="fa-brands fa-youtube fa-xl"></i>
                     </a>}
                 {socials.twitch &&
                     <a href={socials.twitch} target="_blank" rel="noreferrer" className="link inverted cursor-pointer px-1">
-                        <i class="fa-brands fa-twitch fa-xl"></i>
+                        <i className="fa-brands fa-twitch fa-xl"></i>
                     </a>}
                 {socials.facebook &&
                     <a href={socials.facebook} target="_blank" rel="noreferrer" className="link inverted cursor-pointer px-1 ">
-                        <i class="fa-brands fa-facebook-f fa-lg"></i>
+                        <i className="fa-brands fa-facebook-f fa-lg"></i>
                     </a>}
 
                 {socials.leaguepedia &&
                     <a href={socials.leaguepedia} target="_blank" rel="noreferrer" className="link inverted cursor-pointer px-1">
-                        <i class="fa-solid fa-trophy fa-lg"></i>
+                        <i className="fa-solid fa-trophy fa-lg"></i>
                     </a>}
             </div>
         </div>

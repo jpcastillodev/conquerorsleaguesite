@@ -32,16 +32,18 @@ code {
   border-style: solid;
   border-color: rgb(226, 232, 240);
 }
+
 .title {
   background: radial-gradient(circle at center center, rgb(0, 0, 0) 50%, transparent 100%);
   background-image: radial-gradient(circle at center center, rgb(0, 0, 0) 50%, transparent 100%);
 }
+
 .kaisa-image {
   position: absolute;
   top: 72px;
   width: 780px;
   z-index: 0;
-  left:  calc(100vw /1.8);
+  left: calc(100vw /1.8);
   object-fit: cover;
 }
 
@@ -126,16 +128,44 @@ code {
   text-transform: uppercase;
   color: #facc15;
 }
+
 .gradient {
   filter: radial-gradient(52.65% 299.07% at 105.34% 107.69%, rgb(239, 193, 84) 0%, rgb(203, 149, 22) 100%);
   -webkit-text-fill-color: transparent;
 }
+
 .first-block {
   background: radial-gradient(52.65% 299.07% at 105.34% 107.69%, rgb(239, 193, 84) 0%, rgb(203, 149, 22) 100%);
   color: rgb(0, 0, 0);
   -webkit-box-flex: 0;
   flex-grow: 0;
+
 }
+.intro-animation {
+  animation-name: icon-intro-animation;
+  animation-duration: 0.9s;
+  animation-delay: 0.12s;
+  animation-fill-mode: backwards;
+  animation-timing-function: linear;
+}
+
+@keyframes icon-intro-animation {
+  0% {
+    fill: white;
+  }
+
+  100% {
+    /*fill: $colors_laser;*/
+    fill: #c8aa6e;
+  }
+}
+.box {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+    
+  
 
 .first-block .rank {
   text-transform: uppercase;
@@ -144,10 +174,11 @@ code {
 }
 
 .player-name {
-  font-size: 18px;
+  font-size: 28px;
 }
 
 .season-points {
+  font-size: 20px;
   text-transform: uppercase;
 }
 
@@ -212,18 +243,21 @@ code {
   resize: none;
   outline: none;
 }
-.entry-data{
+
+.entry-data {
   width: 100%;
   color: white;
   text-align: center;
   background-color: rgba(255, 255, 255, 0.205);
 }
-.entry-select{
+
+.entry-select {
   width: 100%;
   color: #facc15;
   text-align: center;
   background-color: rgba(255, 255, 255, 0.205);
 }
+
 .headers {
   display: flex;
   -webkit-box-align: stretch;
@@ -555,14 +589,14 @@ code {
   .player-row .info-small .small-rank {
     font-family: "Bebas Neue", "Source Sans Pro", sans-serif;
     text-transform: uppercase;
-    font-size: 24px;
+    font-size: 28px;
     line-height: 24px;
     height: 22px;
     margin-right: 15px;
   }
 
   .player-row .info-small .small-name {
-    font-size: 20px;
+    font-size: 28px;
   }
 
   .container-search {
