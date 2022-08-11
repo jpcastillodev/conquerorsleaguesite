@@ -32,21 +32,25 @@ code {
   border-style: solid;
   border-color: rgb(226, 232, 240);
 }
-
+.title {
+  background: radial-gradient(circle at center center, rgb(0, 0, 0) 50%, transparent 100%);
+  background-image: radial-gradient(circle at center center, rgb(0, 0, 0) 50%, transparent 100%);
+}
 .kaisa-image {
   position: absolute;
   top: 72px;
   width: 780px;
   z-index: 0;
-  left: 5vw;
+  left:  calc(100vw /1.8);
   object-fit: cover;
 }
 
 .lucian-image {
   position: absolute;
   top: 72px;
+  width: 780px;
   z-index: 0;
-  right: 5vw;
+  right: calc(100vw /2);
   object-fit: cover;
 }
 
@@ -100,6 +104,7 @@ code {
 
 .title-block:before {
   z-index: -100;
+  transform: rotate(30deg);
   background-image: url('https://championsqueue.lolesports.com/static/39e5592d0dce1ec215a983add6dcc853/bb7fb/title-pattern.webp');
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsTAAALEwEAmpwYAAAA30lEQVQoz23RvyvFYRQG8M9AEgZFSjEZzAxIxrsbjcxMd1LIH6CsBmVgNCgDgxhsFsliUQabweT6lXuvvjlyenPq7ZzznKfzPqcH2uldYhyDOE74V8H7wCY6MI+nNLON1wQ0sY9hzOI68HOcRt2K/Igl9GENb9IPrbT0BEOYxm1ge9gqFFdKV9CFDbwrTrnDHAZwUMw+i34H/ajhIZ/cjs119GIZjUSolK+Hgqq/wiRGcfSPIIcYwRRuCsIZJvzEAlbRHbmZeC9hUnW6HuwWpjxj0V90Rp7BfWHMBcZ+md8VKV8ylh6AMgAAAABJRU5ErkJggg==);
   opacity: 0;
@@ -121,7 +126,10 @@ code {
   text-transform: uppercase;
   color: #facc15;
 }
-
+.gradient {
+  filter: radial-gradient(52.65% 299.07% at 105.34% 107.69%, rgb(239, 193, 84) 0%, rgb(203, 149, 22) 100%);
+  -webkit-text-fill-color: transparent;
+}
 .first-block {
   background: radial-gradient(52.65% 299.07% at 105.34% 107.69%, rgb(239, 193, 84) 0%, rgb(203, 149, 22) 100%);
   color: rgb(0, 0, 0);

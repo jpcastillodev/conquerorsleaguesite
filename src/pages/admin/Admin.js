@@ -23,9 +23,6 @@ const InputData = () => {
 
     useEffect(() => {
         (async () => {
-
-
-
             const query = await getDocs(collection(db, 'matches'))
             const matchs = query.docs.map(doc => doc.data())
             setMatchs(matchs)

@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
+import { doc, getDoc } from "firebase/firestore"
+import db from '../../tools/firebase.config';
+
 const Dashboard = () => {
 
 
@@ -9,8 +12,7 @@ const Dashboard = () => {
     useEffect(() => {
         (async () => {
             try {
-
-                const { data: ranking } = await axios.post("http://34.125.107.75:9090/ranking")
+                const { data: ranking } = await axios.post("https://us-central1-efektivos-qa.cloudfunctions.net/api/v1/config/ranking")
                 setRanking(ranking.payload)
             } catch (err) {
                 console.log(err)
@@ -26,7 +28,7 @@ const Dashboard = () => {
     }
     return (
         <>
-            <div className="flex justify-center bg-black py-7 ">
+            <div className="hidden md:flex justify-center bg-black">
                 <div aria-hidden="true" className="hidden md:block kaisa-image overflow-hidden" >
                     <picture>
                         <img
@@ -41,22 +43,24 @@ const Dashboard = () => {
                             alt="Lucian" />
                     </picture>
                 </div>
-                <span className="text-center px-8 z-10 ">
+                <span className="text-center px-8 z-10  title  py-7 ">
                     <span className="grid grid-cols-1 gap-2 place-content-center h-48 ">
-                        {/* <img src="/images/icon.PNG" width="75" className="m-auto" alt="icon"/> */}
-                        <span className="text-6xl md:text-9xl italic font-black text-yellow-400">CONQUERORS</span>
-                        <span className="text-5xl text-white ">QUEUE</span>
-
+                        <img src="/images/icon.png" width="75" className="m-auto" alt="icon" />
+                        <span className="text-3xl md:text-8xl italic text-yellow-400 ">
+                            CONQUERORS
+                        </span>
+                        <span className="text-3xl text-white italic ">QUEUE</span>
                     </span>
-
                 </span>
-
             </div>
+            <section className="container text-center  pt-[1vw]">
 
-            <section className="container pt-[3vw] place-content-center px-4 md:px-8">
-                <a className="text-white font-light cursor-pointer text-4xl " href="https://twitter.com/AureliusEsport">
-                    powered by <b className="highlight ">Aurelius</b>
+                <a className="text-white font-light cursor-pointer text-2xl " href="https://twitter.com/AureliusEsport">
+                    powered by <b className="highlight font-light">Aurelius</b>
                 </a>
+            </section>
+            <section className="container place-content-center  pt-[1vw] px-4 md:px-0">
+
                 <div className="grid grid-cols-1 md:grid-cols-5 ">
                     <div className="md:col-span-3 title-block title-container">
                         <div className="mt-4" >
@@ -64,11 +68,17 @@ const Dashboard = () => {
                             <div className="pb-4 subtitle text-center">2022 Off Season</div>
                         </div>
                     </div>
-                    <div className="md:col-span-2 first-block">
-                        <div className="p-6">
+                    <div className="md:col-span-2 first-block flex">
+
+                        <div className="py-6 pl-6 ">
+
                             <div className="rank">1st</div>
                             <div className="player-name">{ranking[0].nick}</div>
                             <div className="season-points">MMR: {ranking[0].mmr}</div>
+                        </div>
+                        <div className="py-6 px-2 ">
+
+                            <img src="/images/conqueror.png" width="150" height="75" alt="conqueror" />
                         </div>
                     </div>
                     <div className="...">
@@ -112,8 +122,8 @@ const Dashboard = () => {
             </section>
 
 
-            <section className="container pt-[4vw] px-4 md:px-8">
-                <div className=" subtitle">2022 Off Season | SPLIT 1 | N DAYS REMAINING</div>
+            <section className="container pt-[4vw] px-4 md:px-0">
+                <div className=" subtitle">2022 Off Season | SPLIT 1 </div>
                 <div className="header-row">
 
                     <div className="leading-champions-subtitle text-white text-2xl">LEADERBOARD</div>
@@ -161,12 +171,7 @@ const Dashboard = () => {
 
 
 const PlayerRow = ({ rank, player, className, show }) => {
-    if(!show){
-        return(
-            <>
-            </>
-        )
-    }
+
 
     const role = {
         BOT: "ADC",
@@ -174,6 +179,36 @@ const PlayerRow = ({ rank, player, className, show }) => {
         TOP: "TOPLANER",
         MID: "MIDLANER",
         JGL: "JUNGLER"
+    }
+
+
+
+    const [socials, setSocials] = useState({})
+
+    useEffect(() => {
+        (async () => {
+
+            const nick = player.nick.toUpperCase().replace(/\s/g, "");
+            try {
+
+                const docRef = doc(db, "player", nick)
+                const docSnap = await getDoc(docRef);
+                if (!docSnap.exists()) {
+                    return
+                }
+
+                const profile = docSnap.data()
+                setSocials(profile)
+            } catch (err) {
+                console.log(err)
+            }
+        })()
+    }, [player.nick])
+    if (!show) {
+        return (
+            <>
+            </>
+        )
     }
     return (
         <div className={["player-row", className, (show ? "hidden" : "")].join(" ")}>
@@ -191,10 +226,28 @@ const PlayerRow = ({ rank, player, className, show }) => {
 
             <div className="row-cell stat seasonPoints">{player.mmr}</div>
             <div className="row-cell name">{player.nick}</div>
-            <div className="row-cell socials">
-                {/* <a href="https://twitter.com/AureliusEsport" target="_blank" rel="noreferrer" className="link inverted">
-                    <i className="fa-brands fa-twitter"></i>
-                </a> */}
+            <div className="row-cell socials ">
+                {socials.twitter &&
+                    <a href={socials.twitter} target="_blank" rel="noreferrer" className="link inverted cursor-pointer px-1">
+                        <i className="fa-brands fa-twitter fa-xl"></i>
+                    </a>}
+                {socials.youtube &&
+                    <a href={socials.youtube} target="_blank" rel="noreferrer" className="link inverted cursor-pointer px-1">
+                        <i class="fa-brands fa-youtube fa-xl"></i>
+                    </a>}
+                {socials.twitch &&
+                    <a href={socials.twitch} target="_blank" rel="noreferrer" className="link inverted cursor-pointer px-1">
+                        <i class="fa-brands fa-twitch fa-xl"></i>
+                    </a>}
+                {socials.facebook &&
+                    <a href={socials.facebook} target="_blank" rel="noreferrer" className="link inverted cursor-pointer px-1 ">
+                        <i class="fa-brands fa-facebook-f fa-lg"></i>
+                    </a>}
+
+                {socials.leaguepedia &&
+                    <a href={socials.leaguepedia} target="_blank" rel="noreferrer" className="link inverted cursor-pointer px-1">
+                        <i class="fa-solid fa-trophy fa-lg"></i>
+                    </a>}
             </div>
         </div>
     )
