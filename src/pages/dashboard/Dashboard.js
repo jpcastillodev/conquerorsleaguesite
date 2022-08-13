@@ -11,7 +11,37 @@ const Dashboard = () => {
 
     useEffect(() => {
 
+
+
         (async () => {
+
+            // const csv = ``
+
+            // const lines = csv.split("\n")
+            // lines.forEach(async line => {
+
+            //     const [
+            //         date,
+            //         nick,
+            //         twitter,
+            //         facebook,
+            //         leaguepedia,
+            //         twitch
+            //     ] = line.split(',')
+
+            //     const payload = {
+            //         date: date.trim(),
+            //         nick: nick.trim(),
+            //         twitter: twitter.trim(),
+            //         facebook: facebook.trim(),
+            //         leaguepedia: leaguepedia.trim(),
+            //         twitch: twitch.trim()
+            //     }
+            //     const alias = nick.toUpperCase().replace(/\s/g, "");
+            //     console.log(alias)
+            //      setDoc(doc(db, "player", alias), payload)
+            // })
+
             try {
                 const { data: ranking } = await axios.post("https://us-central1-conquerorsqueue.cloudfunctions.net/api/ranking")
                 setRanking(ranking.payload)
@@ -136,8 +166,10 @@ const Dashboard = () => {
                     <div className="right-side">
                         <div className="px-3 ">
                             <select
+                                defaultValue=""
                                 onChange={(ev) => setRole(ev.target.value)}
-                                id="roles" className=" container-select bg-main text-white text-sm   block w-full p-2.5 dark:bg-main   dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500">
+                                id="roles" 
+                                className="container-select bg-main text-white text-sm block w-full p-2.5 dark:bg-main dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500">
                                 <option value="" selected>ROLE</option>
                                 <option value="TOP">TOP</option>
                                 <option value="JGL">JUNGLE</option>

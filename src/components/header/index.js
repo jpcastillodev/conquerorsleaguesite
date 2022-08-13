@@ -21,7 +21,6 @@ class Header extends React.Component {
                         <Route exact path="/match-history" element={<MatchHistory />} />
                         <Route exact path="/live-games" element={<LiveGames />} />
                         <Route exact path="/entry-data" element={<EntryData />} />
-
                         <Route exact path="/dashboard" element={<Dashboard />} />
                     </Routes>
                 </div>
