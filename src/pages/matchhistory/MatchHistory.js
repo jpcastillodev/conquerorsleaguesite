@@ -11,14 +11,12 @@ const Dashboard = () => {
 
         (async () => {
             try {
-                const { data: ranking } = await axios.post("https://us-central1-conquerorsqueue.cloudfunctions.net/api/live-games")
-                setGames(Object.entries(ranking.payload))
+                const { data: ranking } = await axios.post("https://us-central1-conquerorsqueue.cloudfunctions.net/api/match-history")
+                setGames(Object.entries(ranking.payload).reverse())
                 setisLoading(false)
             } catch (err) {
                 console.log(err)
             }
-
-
         })()
     }, [])
 
@@ -44,7 +42,7 @@ const Dashboard = () => {
                     <span className="grid grid-cols-1 gap-2 place-content-center h-48 ">
                         <img src="/images/icon.png" width="75" className="m-auto" alt="icon" />
                         <span className="text-3xl md:text-8xl italic text-yellow-400 ">
-                            LIVE GAMES
+                           MATCH HISTORY
                         </span>
                     </span>
                 </span>
@@ -73,7 +71,7 @@ const Dashboard = () => {
 
                         </div>
                     )}
-                    {games.map(([id, game]) => {
+                    {[...games].map(([id, game]) => {
 
                         const redside = game.filter(player => player.side === "RED")
                         const blueside = game.filter(player => player.side === "BLUE")
@@ -83,6 +81,11 @@ const Dashboard = () => {
                             <div className="bg-black p-6 text-white text-center">
                                 <h1 className="text-3xl">
                                     JUEGO #{id}
+                                </h1>
+                                <h1 className="text-3xl">
+                                    {game[0].winner === "BLUE" ? <span className="highlight">1</span>:  <span>0</span>}
+                                    {" "}-{" "}
+                                    {game[0].winner === "RED" ? <span className="highlight">1</span>:  <span>0</span>}
                                 </h1>
                                 <div className="pt-4">
                                     <div className="grid grid-cols-3 text-xl gap-0">

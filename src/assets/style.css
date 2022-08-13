@@ -40,7 +40,7 @@ code {
 
 .kaisa-image {
   position: absolute;
-  top: 72px;
+  top: 65px;
   width: 780px;
   z-index: 0;
   left: calc(100vw /1.8);
@@ -49,7 +49,7 @@ code {
 
 .lucian-image {
   position: absolute;
-  top: 72px;
+  top: 65px;
   width: 780px;
   z-index: 0;
   right: calc(100vw /2);
@@ -128,7 +128,9 @@ code {
   text-transform: uppercase;
   color: #facc15;
 }
-
+.bg-no {
+  background-color: #131416;
+}
 .gradient {
   filter: radial-gradient(52.65% 299.07% at 105.34% 107.69%, rgb(239, 193, 84) 0%, rgb(203, 149, 22) 100%);
   -webkit-text-fill-color: transparent;
@@ -214,6 +216,12 @@ code {
   padding-bottom: 5px;
 }
 
+.container-select {
+  border-bottom: 2px solid #facc15;
+  align-items: center;
+
+}
+
 .secondary-color {
   color: #facc15
 }
@@ -271,7 +279,7 @@ code {
 }
 
 .headers .header.rank {
-  width: 150px;
+  width: 100px;
 }
 
 .headers .header:not(.name) {
@@ -336,7 +344,7 @@ code {
 }
 
 .headers .header.socials {
-  width: 300px;
+  width: 200px;
 }
 
 .headers .header:not(.name) {
@@ -371,7 +379,7 @@ code {
 }
 
 .headers .header.socials {
-  width: 300px;
+  width: 200px;
 }
 
 .headers .header:not(:first-child) {
@@ -522,13 +530,13 @@ code {
   }
 
   .seasonPoints {
-    width: 180px;
+    width: 100px;
   }
 }
 
 @media (min-width: 821px) {
   .player-row .row-cell.socials {
-    width: 300px;
+    width: 200px;
     display: flex;
     -webkit-box-align: center;
     align-items: center;
@@ -538,7 +546,7 @@ code {
   .player-row .row-cell.rank {
     font-family: "Bebas Neue", "Source Sans Pro", sans-serif;
     text-transform: uppercase;
-    width: 150px;
+    width: 100px;
   }
 
   .player-row .row-cell.name {

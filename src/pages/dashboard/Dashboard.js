@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react"
 import axios from "axios"
 import { doc, getDoc } from "firebase/firestore"
 import db from '../../tools/firebase.config';
-
 const Dashboard = () => {
 
 
     const [ranking, setRanking] = useState([])
     const [filterPlayer, setFilterPlayer] = useState("")
+    const [filterRole, setRole] = useState("")
 
     useEffect(() => {
 
         (async () => {
             try {
-                const { data: ranking } = await axios.post("https://us-central1-efektivos-qa.cloudfunctions.net/api/v1/config/ranking")
+                const { data: ranking } = await axios.post("https://us-central1-conquerorsqueue.cloudfunctions.net/api/ranking")
                 setRanking(ranking.payload)
             } catch (err) {
                 console.log(err)
@@ -23,6 +23,13 @@ const Dashboard = () => {
         })()
     }, [])
 
+
+    function isInFilter(player, filterPlayer) {
+        return player.nick.toLowerCase().includes(filterPlayer.toLowerCase())
+    }
+    function isInRole(player, role) {
+        return player.role === role
+    }
     if (!ranking.length) {
         return <>
         </>
@@ -126,24 +133,41 @@ const Dashboard = () => {
                 <div className="header-row">
 
                     <div className="leading-champions-subtitle text-white text-2xl">LEADERBOARD</div>
-                    <div className="container-search right-side">
-                        <div data-gatsby-image-wrapper="" className="gatsby-image-wrapper gatsby-image-wrapper-constrained ">
-                            <div style={{ display: "block", maxWidth: "24px" }}>
-                                <i className="fa-solid fa-magnifying-glass fa-xl secondary-color"></i>
+                    <div className="right-side">
+                        <div className="px-3 ">
+                            <select
+                                onChange={(ev) => setRole(ev.target.value)}
+                                id="roles" className=" container-select bg-main text-white text-sm   block w-full p-2.5 dark:bg-main   dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500">
+                                <option value="" selected>ROLE</option>
+                                <option value="TOP">TOP</option>
+                                <option value="JGL">JUNGLE</option>
+                                <option value="MID">MID</option>
+                                <option value="BOT">ADC</option>
+                                <option value="SUP">SUP</option>
 
-                            </div>
-                            <div aria-hidden="true" data-placeholder-image="" >
-                            </div>
+                            </select>
                         </div>
-                        <input type="text" placeholder="Search player name" onChange={(ev) => setFilterPlayer(ev.target.value)} />
+                        <div className="container-search ">
+                            <div data-gatsby-image-wrapper="" className="gatsby-image-wrapper gatsby-image-wrapper-constrained ">
+                                <div style={{ display: "block", maxWidth: "24px" }}>
+                                    <i className="fa-solid fa-magnifying-glass fa-xl secondary-color"></i>
+
+                                </div>
+                                <div aria-hidden="true" data-placeholder-image="" >
+                                </div>
+                            </div>
+                            <input type="text" placeholder="Search player name" onChange={(ev) => setFilterPlayer(ev.target.value)} />
+                        </div>
                     </div>
                 </div>
                 <div className="table">
                     <div className="headers">
-                        <button className="header sortable rank">Split rank</button>
+                        <button className="header sortable rank">rank</button>
                         <button className="header sortable lp">Role</button>
-                        <button className="header sortable seasonPoints">MMR</button>
                         <div className="header name">Name</div>
+                        <button className="header sortable seasonPoints">MMR</button>
+                        <button className="header sortable lp">WINRATE</button>
+                        <button className="header sortable lp">W/L</button>
                         <div className="header socials">Socials</div>
                     </div>
 
@@ -153,9 +177,10 @@ const Dashboard = () => {
                             .map((player, index) => (
                                 <PlayerRow
                                     key={index}
-                                    show={(!filterPlayer || player.nick.toLowerCase().includes(filterPlayer.toLowerCase()))}
+                                    show={(!filterPlayer || isInFilter(player, filterPlayer)) && (!filterRole || isInRole(player, filterRole))}
                                     rank={index + 1}
                                     player={player}
+                                    isFirst={index === 0}
                                     className={index === 0 && !filterPlayer ? "first with-divider" : 0}
 
                                 />
@@ -170,7 +195,7 @@ const Dashboard = () => {
 
 
 
-const PlayerRow = ({ rank, player, className, show }) => {
+const PlayerRow = ({ rank, player, className, show, isFirst }) => {
 
 
     const role = {
@@ -180,7 +205,6 @@ const PlayerRow = ({ rank, player, className, show }) => {
         MID: "middle",
         JGL: "jungle"
     }
-
 
 
     const [socials, setSocials] = useState({})
@@ -210,30 +234,43 @@ const PlayerRow = ({ rank, player, className, show }) => {
             </>
         )
     }
+    const games = player.wins + player.looses
+    const wr = ((player.wins / (games || 1)) * 100).toFixed(0)
     return (
         <div key={rank} className={["player-row", className, (show ? "hidden" : "")].join(" ")}>
             <div className="info-small">
                 <div className="small-top-row">
-                    <div className="small-rank">#{rank}</div>
+                    <div className="small-rank">{rank}
+                    </div>
                     <div className="small-name">{player.nick}</div>
                 </div>
                 <div>
-                    <div className="text-2xl">MMR: {player.mmr}</div>
+                    <div className="text-2xl">MMR: {player.mmr} </div>
                 </div>
             </div>
-            <div className="row-cell rank">#{rank}</div>
+            <div className="row-cell rank">{rank}</div>
             <div className="row-cell lp ">
                 <div className="grid justify-items-start md:justify-items-center w-full ">
-
-                    <img
-                        className="intro-animation active first-icon"
-                        alt="icon"
-                        src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-champ-select/global/default/svg/position-${role[player.role]}.svg`} width="30" />
+                    {
+                        isFirst ?
+                            <img
+                                className="intro-animation active first-icon"
+                                alt="icon"
+                                src={`/images/${role[player.role]}.svg`} width="30" />
+                            : <img
+                                className="intro-animation active first-icon"
+                                alt="icon"
+                                src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-champ-select/global/default/svg/position-${role[player.role]}.svg`} width="30" />
+                    }
                 </div>
             </div>
+            <div className="row-cell name">{player.nick}</div>
 
             <div className="row-cell stat seasonPoints">{player.mmr}</div>
-            <div className="row-cell name">{player.nick}</div>
+            <div className="row-cell stat seasonPoints">{wr}% </div>
+            <div className="row-cell stat seasonPoints">{player.wins}-{player.looses}</div>
+
+
             <div className="row-cell socials ">
                 {socials.twitter &&
                     <a href={socials.twitter} target="_blank" rel="noreferrer" className="link inverted cursor-pointer px-1">

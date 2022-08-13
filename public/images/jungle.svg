@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 288.39 299.68">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #010101;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g id="Jungler_Icon_Role">
+      <path class="cls-1" d="M0,80.7s43.46,51.92,38.94,128.11l110.62,90.86S190.76,100.46,60.39,14.11c0,0,28.18,54.03,29.91,146.17,0,0-23.7-53.05-90.3-79.58Z"/>
+      <path class="cls-1" d="M232.52,0s-58.13,85.22-67.72,104.41l5.64,71.86,31.04-52.1S206.56,50.23,232.52,0Z"/>
+      <path class="cls-1" d="M288.39,88.13s-98.2,42.24-112.31,186.71l59.26-57.57s5.08-81.09,53.05-129.15Z"/>
+    </g>
+  </g>
+</svg>

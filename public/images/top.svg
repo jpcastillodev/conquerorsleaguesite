@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 254.32 256.56">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #010101;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g id="Top_Icon_Role">
+      <polygon class="cls-1" points="254.32 254.38 254.32 33.97 214.38 73.91 214.38 215.08 68.5 215.08 27.02 256.56 254.32 254.38"/>
+      <polygon class="cls-1" points="235.94 0 0 0 0 233.88 49.34 184.54 49.34 51.06 184.11 51.06 235.94 0"/>
+      <rect class="cls-1" x="96.41" y="96.62" width="72.9" height="72.9" transform="translate(265.71 266.14) rotate(180)"/>
+    </g>
+  </g>
+</svg>

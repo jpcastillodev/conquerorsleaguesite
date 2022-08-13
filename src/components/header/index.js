@@ -2,7 +2,7 @@ import React from "react"
 
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "../../pages/dashboard/Dashboard";
-import Admin from "../../pages/admin/Admin";
+import MatchHistory from "../../pages/matchhistory/MatchHistory";
 import EntryData from "../../pages/entrydata/EntryData";
 import LiveGames from "../../pages/livegames/LiveGames";
 
@@ -18,7 +18,7 @@ class Header extends React.Component {
                 <div className=" py-5 min-h-max">
                     <Routes>
                         <Route path="/" element={<Dashboard />} />
-                        <Route exact path="/match-history" element={<Admin />} />
+                        <Route exact path="/match-history" element={<MatchHistory />} />
                         <Route exact path="/live-games" element={<LiveGames />} />
                         <Route exact path="/entry-data" element={<EntryData />} />
 
