@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
-import { doc, getDoc } from "firebase/firestore"
-import db from '../../tools/firebase.config';
+
 const Dashboard = () => {
 
 
@@ -161,41 +160,11 @@ const PlayerRow = ({ player, side }) => {
 
 
 
-    const [online, setIsOnline] = useState(false)
-
-    useEffect(() => {
-        (async () => {
-
-            const nick = player.name.toUpperCase().replace(/\s/g, "");
-            try {
-
-                const docRef = doc(db, "player", nick)
-                const docSnap = await getDoc(docRef);
-                if (!docSnap.exists()) {
-                    return
-                }
-                const profile = docSnap.data()
-                if (profile.twitch) {
-                    setIsOnline(profile.twitch)
-
-                }
-
-            } catch (err) {
-                // console.log(err)
-            }
-        })()
-    }, [player.name])
 
     return (
         <span>
-             {online && side=== "blue" &&
-                <a href={online} target="_blank" rel="noreferrer" className="link inverted cursor-pointer px-1">
-                    <i className="fa-brands fa-twitch fa-xs"></i>
-                </a>}
-            {player.name} {online && side=== "red" &&
-                <a href={online} target="_blank" rel="noreferrer" className="link inverted cursor-pointer px-1">
-                    <i className="fa-brands fa-twitch fa-xs"></i>
-                </a>}
+        
+            {player.name} 
         </span>
     )
 }

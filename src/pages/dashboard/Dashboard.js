@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react"
 import axios from "axios"
 import { doc, getDoc } from "firebase/firestore"
 import db from '../../tools/firebase.config';
+import { useNavigate } from "react-router-dom";
+
 const Dashboard = () => {
 
 
@@ -168,7 +170,7 @@ const Dashboard = () => {
                             <select
                                 defaultValue=""
                                 onChange={(ev) => setRole(ev.target.value)}
-                                id="roles" 
+                                id="roles"
                                 className="container-select bg-main text-white text-sm block w-full p-2.5 dark:bg-main dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500">
                                 <option value="" selected>ROLE</option>
                                 <option value="TOP">TOP</option>
@@ -229,6 +231,7 @@ const Dashboard = () => {
 
 const PlayerRow = ({ rank, player, className, show, isFirst }) => {
 
+    const navigate = useNavigate();
 
     const role = {
         BOT: "bottom",
@@ -266,10 +269,17 @@ const PlayerRow = ({ rank, player, className, show, isFirst }) => {
             </>
         )
     }
+    const goToProfile = () => {
+        navigate(`/profile/${player.id}`);
+    }
     const games = player.wins + player.looses
     const wr = ((player.wins / (games || 1)) * 100).toFixed(0)
     return (
-        <div key={rank} className={["player-row", className, (show ? "hidden" : "")].join(" ")}>
+        <div
+            onClick={() => {
+                goToProfile()
+            }}
+            key={rank} className={["player-row cursor-pointer hover:scale-105  ease-in duration-200", className, (show ? "hidden" : "")].join(" ")}>
             <div className="info-small">
                 <div className="small-top-row">
                     <div className="small-rank">{rank}

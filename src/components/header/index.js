@@ -5,6 +5,7 @@ import Dashboard from "../../pages/dashboard/Dashboard";
 import MatchHistory from "../../pages/matchhistory/MatchHistory";
 import EntryData from "../../pages/entrydata/EntryData";
 import LiveGames from "../../pages/livegames/LiveGames";
+import Profile from "../../pages/profile/Profile";
 
 import Navigation from "../navigation";
 class Header extends React.Component {
@@ -20,6 +21,8 @@ class Header extends React.Component {
                         <Route path="/" element={<Dashboard />} />
                         <Route exact path="/match-history" element={<MatchHistory />} />
                         <Route exact path="/live-games" element={<LiveGames />} />
+                        <Route exact path="/profile/:uid" element={<Profile />} />
+
                         <Route exact path="/entry-data" element={<EntryData />} />
                         <Route exact path="/dashboard" element={<Dashboard />} />
                     </Routes>

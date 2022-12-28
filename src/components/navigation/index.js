@@ -1,21 +1,30 @@
 import React from "react"
+import { useNavigate } from "react-router-dom";
 
 const Navigation = () => {
+    const navigate = useNavigate();
 
     return (
         <>
             <div className="justify-between px-6 pt-6 w-full uppercase text-xs tracking-widest font-light">
                 <div className="grid justify-items-center w-full">
                     <div className="flex gap-3  text-white text-sm mdtext-lg">
-                        <a href="/" className="cursor-pointer">
+                        <div
+                            onClick={() => navigate("/")}
+
+                            href="/" className="cursor-pointer">
                             LEADERBOARD
-                        </a>
+                        </div>
                         <div>|</div>
-                        <a href="/live-games" className="cursor-pointer">
+                        <div
+                            onClick={() => navigate("/live-games")}
+                            href="/live-games" className="cursor-pointer">
                             LIVE GAMES
-                        </a>
+                        </div>
                         <div>|</div>
-                        <a href="/match-history" className="cursor-pointer">
+                        <a
+                            onClick={() => navigate("/match-history")}
+                            href="/match-history" className="cursor-pointer">
                             MATCH HISTORY
                         </a>
                         <div>|</div>
